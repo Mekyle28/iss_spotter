@@ -5,17 +5,35 @@
 // const { fetchMyIP } = require('./iss');
 // const { fetchCoordsByIP } = require('./iss');
 
-const { fetchISSFlyOverTimes } = require('./iss');
 
-const obj = { latitude: 42.7729381, longitude: -80.9828842 };
+const 
 
-fetchISSFlyOverTimes(obj, (error, data) => {
-  if (error !== null) {
-    console.log("error", error);
-    return;
+// index.js
+
+const { nextISSTimesForMyLocation } = require('./iss');
+
+nextISSTimesForMyLocation((error, passTimes) => {
+  if (error) {
+    return console.log("It didn't work!", error);
   }
-  console.log("yay it worked! we got the rise time and duration:", data);
+  // success, print out the deets!
+  console.log("let see what we got", passTimes);
+  for (let obj of passTimes) {
+    console.log(`Next pass at ${new Date(obj.risetime)} 19:26:12 GMT-0700 (Pacific Daylight Time) for ${obj.duration} seconds!`);
+  }
 });
+
+// const { fetchISSFlyOverTimes } = require('./iss');
+
+// const obj = { latitude: 42.7729381, longitude: -80.9828842 };
+
+// fetchISSFlyOverTimes(obj, (error, data) => {
+//   if (error) {
+//     console.log("error", error);
+//     return;
+//   }
+//   console.log("yay it worked! we got the rise time and duration:", data);
+// });
 
 
 
