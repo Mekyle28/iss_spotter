@@ -26,11 +26,13 @@ const fetchCoordsByIP = function(ip, callback) {
 
     if (error !== null) {
       console.log("error: ", error);
-      return callback(error, null);
+      callback(error, null);
+      return;
     }
     if (!body.success) {
-      const message = (`looks like ${ip} isn't a valid IP address. Please try again with a valid IP`);
-      return callback(Error(message), null);
+      const message = `Success status was ${body.success}. Server message says: ${body.message} when fetching for IP ${body.ip}`;
+      callback(Error(message), null);
+      return;
     }
     const lat = body.latitude;
     const long = body.longitude;
@@ -38,7 +40,8 @@ const fetchCoordsByIP = function(ip, callback) {
       latitude: lat,
       longitude: long
     };
-    return callback(null, coord);
+    callback(null, coord);
+    return;
   });
 };
 
