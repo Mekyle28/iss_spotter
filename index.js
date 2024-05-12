@@ -6,7 +6,9 @@
 // const { fetchCoordsByIP } = require('./iss');
 
 
-const 
+const printPassTimes = function(passTimes) {
+
+}
 
 // index.js
 
@@ -18,7 +20,7 @@ nextISSTimesForMyLocation((error, passTimes) => {
   }
   // success, print out the deets!
   console.log("let see what we got", passTimes);
-  for (let obj of passTimes) {
+  for (const obj of passTimes) {
     console.log(`Next pass at ${new Date(obj.risetime)} 19:26:12 GMT-0700 (Pacific Daylight Time) for ${obj.duration} seconds!`);
   }
 });
