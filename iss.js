@@ -61,12 +61,12 @@ const fetchCoordsByIP = function(ip, callback) {
 
 const fetchISSFlyOverTimes = function(coord, callback) {
   needle.get(`https://iss-flyover.herokuapp.com/json/?lat=${coord.latitude}&lon=${coord.longitude}`, (error, response, body) => {
-    if (error !== null) {
+    if (error) {
       callback(error, null);
       return;
     }
     if (response.statusCode !== 200) {
-      const message = `server message says: ${body}`;
+      const message = `Status code: ${response.statusCode} when fetching ISS pass times: ${body}`;
       callback(Error(message), null);
       return;
     }
